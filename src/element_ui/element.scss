@@ -1,0 +1,4 @@
+/* table 添加border 表头错位*/
+.el-table th.gutter {
+  display: table-cell !important;
+}

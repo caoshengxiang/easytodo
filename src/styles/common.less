@@ -1,0 +1,71 @@
+@import url('../styles/var');
+
+// 文字一行显示
+.com-a-line-dash {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// 文字单行显示,样式注意顺序
+.com-a-line {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 红星号
+.com-red-dot {
+  &:before {
+    content: '*';
+    display: inline-block;
+    color: red;
+    padding-right: 3px;
+  }
+}
+
+// 虚线
+.com-dashed-line {
+  width: 100%;
+  //height: 0px;
+  border-bottom: 1px dashed #ccc;
+}
+
+.com-a-link {
+  color: #1E88E5;
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+/* 路由部分 公用样式 */
+.com-pages {
+  .com-page-pos {
+    padding: 20px 0;
+    height: 50px;
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .com-page-box {
+    //border: 1px solid #f5f5f5;
+    background-color: #ffffff;
+    width: 100%;
+    //box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+
+    .com-page-bar {
+      border-bottom: 1px solid #f5f5f5;
+      padding: 20px;
+      box-sizing: border-box;
+      height: 60px;
+    }
+    .com-page-con {
+      padding: 20px;
+      box-sizing: border-box;
+    }
+  }
+
+}
