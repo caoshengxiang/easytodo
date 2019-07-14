@@ -11,7 +11,7 @@
 const BASE_URL = process.env.NODE_ENV === 'production'
   ? '/'
   : '/'
-// const webpack = require('webpack')
+const webpack = require('webpack')
 
 module.exports = {
   publicPath: BASE_URL,
@@ -39,11 +39,11 @@ module.exports = {
   // },
   configureWebpack: {
       plugins: [
-        // new webpack.ProvidePlugin({
-        //   $: 'jquery',
-        //   jQuery: 'jquery',
-        //   'windows.jQuery': 'jquery',
-        // }),
+        new webpack.ProvidePlugin({
+          $: 'jquery',
+          jQuery: 'jquery',
+          'windows.jQuery': 'jquery',
+        }),
       ],
   },
   pwa: {

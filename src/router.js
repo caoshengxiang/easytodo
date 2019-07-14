@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import routerV from './components/routerV'
-import VueCookies from 'vue-cookies'
-import API from './utils/api'
-import { Loading } from 'element-ui'
+import mainPage from './components/mainPage'
+// import VueCookies from 'vue-cookies'
+// import API from './utils/api'
+// import { Loading } from 'element-ui'
 
 Vue.use(Router)
 
@@ -38,37 +38,38 @@ const router = new Router({
     {
       path: '/web',
       name: 'web',
-      component: routerV,
+      component: mainPage,
       children: [
         {
           path: 'home',
           name: 'home',
           component: () => import('./views/home/home'),
           meta: {
-            authKey: true,
+            pos: [{title: '首页', name: 'home'}]
           },
         },
         {
-          path: 'attendanceRecord',
-          name: 'attendanceRecord',
-          component: () => import('./views/attendanceRecord/attendanceRecord'),
+          path: 'animatecss',
+          name: 'animatecss',
+          component: () => import('./views/css/animatecss/animatecss'),
           meta: {
-            authKey: true,
-          },
-        }, {
-          path: 'setAccount',
-          name: 'setAccount',
-          component: () => import('./views/set/setAccount'),
-          meta: {
-            authKey: true,
+            pos: [
+              {title: '首页', name: 'home'},
+              {title: 'css 动画', name: 'animatecss'},
+              {title: 'animate.css', name: 'animatecss'},
+            ]
           },
         },
         {
-          path: 'setAttendance',
-          name: 'setAttendance',
-          component: () => import('./views/set/setAttendance'),
+          path: 'hovercss',
+          name: 'hovercss',
+          component: () => import('./views/css/hovercss/hovercss'),
           meta: {
-            authKey: true,
+            pos: [
+              {title: '首页', name: 'home'},
+              {title: 'css 动画', name: 'hovercss'},
+              {title: 'hover.css', name: 'hovercss'},
+            ]
           },
         },
         {
@@ -138,7 +139,7 @@ router.beforeEach((to, from, next) => {
         //   backUrl: to.fullPath,
         // }, // 将跳转的路由path作为参数，登录成功后跳转到该路由
       })
-    }*/
+    } */
     next()
   } else {
     next()
