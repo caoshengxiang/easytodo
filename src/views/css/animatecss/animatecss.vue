@@ -1,10 +1,12 @@
+<!--animate.css 在main.js 全局引入-->
+
 <template>
   <div class="com-pages">
     <div class="com-page-title">animate.css动画</div>
     <div class="com-page-con">
       <div class="com-h2">效果展示：</div>
       <div class="com-text">
-        <div id="animate">animate 动画</div>
+<!--        <div id="animate">animate 动画</div>-->
         <div class="box">
           <div class="box-title">Attention Seekers</div>
           <div class="box-list">

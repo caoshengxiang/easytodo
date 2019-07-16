@@ -73,6 +73,44 @@ const router = new Router({
           },
         },
         {
+          path: 'magiccss',
+          name: 'magiccss',
+          component: () => import('./views/css/magiccss/magiccss'),
+          meta: {
+            pos: [
+              {title: '首页', name: 'home'},
+              {title: 'css 动画', name: 'magiccss'},
+              {title: 'magic.css', name: 'magiccss'},
+            ]
+          },
+        },
+        { // 表单验证
+          path: 'elFormFieldValidation',
+          name: 'elFormFieldValidation',
+          component: () => import('./views/element/elForm/elFormFieldValidation'),
+          meta: {
+            pos: [
+              {title: '首页', name: 'home'},
+              {title: 'element ui', name: 'elFormFieldValidation'},
+              {title: '表单', name: 'elFormFieldValidation'},
+              {title: '验证', name: 'elFormFieldValidation'},
+            ]
+          },
+        },
+        { // 自定义表单
+          path: 'elFormCustom',
+          name: 'elFormCustom',
+          component: () => import('./views/element/elForm/elFormCustom'),
+          meta: {
+            pos: [
+              {title: '首页', name: 'home'},
+              {title: 'element ui', name: 'elFormCustom'},
+              {title: '表单', name: 'elFormCustom'},
+              {title: '自定义表单', name: 'elFormCustom'},
+            ]
+          },
+        },
+        {
           path: '*',
           name: '404',
           // redirect: '/',

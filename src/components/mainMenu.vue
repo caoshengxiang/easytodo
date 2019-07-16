@@ -25,9 +25,12 @@
         <i class="el-icon-setting"></i>
         <span>element ui</span>
       </template>
-      <el-menu-item index="elForm">表单</el-menu-item>
+      <el-submenu index="elForm">
+        <template slot="title">表单</template>
+        <el-menu-item index="elFormFieldValidation">验证</el-menu-item>
+        <el-menu-item index="elFormCustom">自定义表单</el-menu-item>
+      </el-submenu>
       <el-menu-item index="elTable">表格</el-menu-item>
-      <el-menu-item index="elCustomForm">自定义表单</el-menu-item>
     </el-submenu>
     <el-submenu index="30">
       <template slot="title">

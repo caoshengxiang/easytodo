@@ -6,11 +6,16 @@ import './registerServiceWorker'
 import './styles/basic.css'
 import './element_ui' // element
 import animated from 'animate.css'
+
+// 引入弹窗组件
+import vDialogs from 'v-dialogs'
+
 // monment 作为全局方法
 import moment from 'moment'
 import webStorage from 'webStorage'
 import VueCookies from 'vue-cookies'
 
+Vue.use(vDialogs)
 Vue.use(animated)
 
 Vue.prototype.$moment = (t, format) => {
