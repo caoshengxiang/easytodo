@@ -360,3 +360,14 @@ export function groupedArray (array, subGroupLength) {
   }
   return newArray
 }
+
+/**
+ * html to text，可以处理简单的富文本
+ * @param html 富文本
+ * @return text 文本
+ **/
+export function richTextToText (html) {
+  let re1 = new RegExp('<.+?>', 'g') // 匹配html标签的正则表达式，"g"是搜索匹配多个符合的内容
+  let msg = html.replace(re1, '').replace(/&.+?;/g, '') // 执行替换成空字符, 占位符替换为空
+  return msg
+}
