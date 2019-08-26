@@ -61,6 +61,13 @@
       <i class="el-icon-setting"></i>
       <span slot="title">小程序</span>
     </el-menu-item>
+    <el-submenu index="70">
+      <template slot="title">
+        <i class="el-icon-setting"></i>
+        <span>工具</span>
+      </template>
+      <el-menu-item index="uploadImg">图片上传</el-menu-item>
+    </el-submenu>
   </el-menu>
 </template>
 
