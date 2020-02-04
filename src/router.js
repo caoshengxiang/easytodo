@@ -45,7 +45,7 @@ const router = new Router({
           name: 'home',
           component: () => import('./views/home/home'),
           meta: {
-            pos: [{title: '首页', name: 'home'}]
+            pos: [{ title: '首页', name: 'home' }]
           },
         },
         {
@@ -54,9 +54,9 @@ const router = new Router({
           component: () => import('./views/css/animatecss/animatecss'),
           meta: {
             pos: [
-              {title: '首页', name: 'home'},
-              {title: 'css 动画', name: 'animatecss'},
-              {title: 'animate.css', name: 'animatecss'},
+              { title: '首页', name: 'home' },
+              { title: 'css 动画', name: 'animatecss' },
+              { title: 'animate.css', name: 'animatecss' },
             ]
           },
         },
@@ -66,9 +66,9 @@ const router = new Router({
           component: () => import('./views/css/hovercss/hovercss'),
           meta: {
             pos: [
-              {title: '首页', name: 'home'},
-              {title: 'css 动画', name: 'hovercss'},
-              {title: 'hover.css', name: 'hovercss'},
+              { title: '首页', name: 'home' },
+              { title: 'css 动画', name: 'hovercss' },
+              { title: 'hover.css', name: 'hovercss' },
             ]
           },
         },
@@ -78,9 +78,9 @@ const router = new Router({
           component: () => import('./views/css/magiccss/magiccss'),
           meta: {
             pos: [
-              {title: '首页', name: 'home'},
-              {title: 'css 动画', name: 'magiccss'},
-              {title: 'magic.css', name: 'magiccss'},
+              { title: '首页', name: 'home' },
+              { title: 'css 动画', name: 'magiccss' },
+              { title: 'magic.css', name: 'magiccss' },
             ]
           },
         },
@@ -90,10 +90,10 @@ const router = new Router({
           component: () => import('./views/element/elForm/elFormFieldValidation'),
           meta: {
             pos: [
-              {title: '首页', name: 'home'},
-              {title: 'element ui', name: 'elFormFieldValidation'},
-              {title: '表单', name: 'elFormFieldValidation'},
-              {title: '验证', name: 'elFormFieldValidation'},
+              { title: '首页', name: 'home' },
+              { title: 'element ui', name: 'elFormFieldValidation' },
+              { title: '表单', name: 'elFormFieldValidation' },
+              { title: '验证', name: 'elFormFieldValidation' },
             ]
           },
         },
@@ -103,10 +103,10 @@ const router = new Router({
           component: () => import('./views/element/elForm/elFormCustom'),
           meta: {
             pos: [
-              {title: '首页', name: 'home'},
-              {title: 'element ui', name: 'elFormCustom'},
-              {title: '表单', name: 'elFormCustom'},
-              {title: '自定义表单', name: 'elFormCustom'},
+              { title: '首页', name: 'home' },
+              { title: 'element ui', name: 'elFormCustom' },
+              { title: '表单', name: 'elFormCustom' },
+              { title: '自定义表单', name: 'elFormCustom' },
             ]
           },
         },
@@ -146,38 +146,38 @@ router.beforeEach((to, from, next) => {
   //   }
   // }
   if (to.meta.authKey) {
-   /* let token = VueCookies.get('token')
-    if (token) {
-      const loading = Loading.service({
-        lock: true,
-        text: 'Loading',
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.7)'
-      })
-      API.other.checkToken({token: token}).then( // 检测token
-        da => {
-          if (da) {
-            loading.close()
-            next()
-          } else {
-            loading.close()
-            next({
-              path: '/error',
-              // query: {
-              //   backUrl: to.fullPath,
-              // }, // 将跳转的路由path作为参数，登录成功后跳转到该路由
-            })
-          }
-        },
-      )
-    } else {
-      next({
-        path: '/error',
-        // query: {
-        //   backUrl: to.fullPath,
-        // }, // 将跳转的路由path作为参数，登录成功后跳转到该路由
-      })
-    } */
+    /* let token = VueCookies.get('token')
+     if (token) {
+       const loading = Loading.service({
+         lock: true,
+         text: 'Loading',
+         spinner: 'el-icon-loading',
+         background: 'rgba(0, 0, 0, 0.7)'
+       })
+       API.other.checkToken({token: token}).then( // 检测token
+         da => {
+           if (da) {
+             loading.close()
+             next()
+           } else {
+             loading.close()
+             next({
+               path: '/error',
+               // query: {
+               //   backUrl: to.fullPath,
+               // }, // 将跳转的路由path作为参数，登录成功后跳转到该路由
+             })
+           }
+         },
+       )
+     } else {
+       next({
+         path: '/error',
+         // query: {
+         //   backUrl: to.fullPath,
+         // }, // 将跳转的路由path作为参数，登录成功后跳转到该路由
+       })
+     } */
     next()
   } else {
     next()

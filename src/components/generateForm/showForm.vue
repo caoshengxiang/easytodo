@@ -106,8 +106,10 @@
     margin-left: 20px;
     border: 1px solid #ccc;
     padding: 20px;
+
     .form-li {
       padding: 5px 0;
+
       .name {
         font-weight: bold;
         display: inline-block;

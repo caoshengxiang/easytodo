@@ -15,7 +15,7 @@ export function filedRequired (type = 'blur', name = '', preText = '') { // 验�
   if (preText) { // 有时需要特殊缀，如：上传图片  blur 提示请选择  filedRequired('blur', '', '请选择'),
     msg = preText
   }
-  return {required: true, message: `${msg}${name}`, trigger: type}
+  return { required: true, message: `${msg}${name}`, trigger: type }
 }
 
 export function filedLength (min = 1, max = 20) { // 验证长度
@@ -39,11 +39,12 @@ export function filedType (type = 'number', name = '') { // 类型
   } else {
     str = '有效类型'
   }
-  return {type: type, message: `${name}必须为${str}`}
+  return { type: type, message: `${name}必须为${str}` }
 }
 
-export function filedValidator (callback = () => {}, trigger = 'blur') { // 自定义规则
-  return {validator: callback, trigger: trigger}
+export function filedValidator (callback = () => {
+}, trigger = 'blur') { // 自定义规则
+  return { validator: callback, trigger: trigger }
 }
 
 export const validate = {

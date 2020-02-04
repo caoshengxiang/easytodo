@@ -11,7 +11,8 @@
 
         <el-form-item>
           <el-button @click="prePage('ruleFormProd')" v-if="currentPage != 1">预览上一页</el-button>
-          <el-button @click="submitForm('ruleFormProd')">{{currentPage == configFormList.length ? '预览提交' : '预览下一页'}}</el-button>
+          <el-button @click="submitForm('ruleFormProd')">{{currentPage == configFormList.length ? '预览提交' : '预览下一页'}}
+          </el-button>
           <el-button type="danger" @click="saveForm">保存模板</el-button>
         </el-form-item>
       </el-form>
@@ -42,7 +43,8 @@
               action: '',
               headers: {},
               key: 'data.url',
-              callback () {},
+              callback () {
+              },
             }
           },
         },
@@ -67,7 +69,7 @@
         this.configForm.list = this.params.configFormList[this.currentPage - 1]
       },
       saveForm () {
-        this.$emit('close', {data: 'save'})
+        this.$emit('close', { data: 'save' })
       },
     },
     created () {

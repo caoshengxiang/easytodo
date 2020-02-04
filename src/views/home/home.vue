@@ -19,8 +19,7 @@
       }
     },
     computed: {},
-    methods: {
-    },
+    methods: {},
     beforeCreate () {
 
     },
@@ -34,30 +33,37 @@
 
   .inline-box-item {
     margin: 20px;
+
     .total {
       padding: 0 0px 0 0px;
       width: 70%;
+
       .right {
         float: right;
       }
     }
+
     .progress-box {
       display: flex;
       align-items: center;
+
       .progress {
         height: 40px;
         width: 70%;
         display: inline-block;
       }
+
       .progress-2 {
         height: 40px;
         width: 70%;
         display: inline-block;
         background-color: #ebeef5;
+
         div {
           display: inline-block;
         }
       }
+
       .name {
         display: inline-block;
         margin-left: 10px;

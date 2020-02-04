@@ -73,6 +73,7 @@
 
 <script>
   import mixin from '../config/mixin'
+
   export default {
     mixins: [mixin],
     name: 'mainMenu',

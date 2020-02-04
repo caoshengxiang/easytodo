@@ -5,9 +5,9 @@ export const originalFormData = {
       name: '单选框', // label名称
       idName: '单选框', // 组件名称
       data: [ // 选项数据
-        {label: '备选项1', value: 1},
-        {label: '备选项2', value: 2},
-        {label: '备选项3', value: 3},
+        { label: '备选项1', value: 1 },
+        { label: '备选项2', value: 2 },
+        { label: '备选项3', value: 3 },
       ],
       placeholder: '',
       bindValue: '', // 绑定值
@@ -25,9 +25,9 @@ export const originalFormData = {
       name: '多选框',
       idName: '多选框',
       data: [
-        {label: '复选框A', value: 1},
-        {label: '复选框B', value: 2},
-        {label: '复选框C', value: 3},
+        { label: '复选框A', value: 1 },
+        { label: '复选框B', value: 2 },
+        { label: '复选框C', value: 3 },
       ],
       placeholder: '',
       bindValue: [],

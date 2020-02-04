@@ -1,7 +1,7 @@
 <template>
-    <div style="text-align: center">
-      登录过期，请重新登录
-    </div>
+  <div style="text-align: center">
+    登录过期，请重新登录
+  </div>
 </template>
 
 <script>

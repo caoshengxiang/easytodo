@@ -38,21 +38,21 @@ module.exports = {
   //   },
   // },
   configureWebpack: {
-      plugins: [
-        new webpack.ProvidePlugin({
-          $: 'jquery',
-          jQuery: 'jquery',
-          'windows.jQuery': 'jquery',
-        }),
-      ],
+    // plugins: [
+    //   new webpack.ProvidePlugin({
+    //     $: 'jquery',
+    //     jQuery: 'jquery',
+    //     'windows.jQuery': 'jquery',
+    //   }),
+    // ],
   },
-  pwa: {
-    iconPaths: {
-      favicon32: 'favicon.png',
-      favicon16: 'favicon.png',
-      appleTouchIcon: 'favicon.png',
-      maskIcon: 'favicon.png',
-      msTileImage: 'favicon.png'
-    }
-  }
+  // pwa: {
+  //   iconPaths: {
+  //     favicon32: 'logo.png',
+  //     favicon16: 'logo.png',
+  //     appleTouchIcon: 'logo.png',
+  //     maskIcon: 'logo.png',
+  //     msTileImage: 'logo.png'
+  //   }
+  // }
 }

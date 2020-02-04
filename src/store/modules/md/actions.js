@@ -3,10 +3,10 @@
  */
 
 export default {
-  test ({commit}, param) {
+  test ({ commit }, param) {
     // ajax
     // console.log('dispatch', param)
     commit('mut_Test', 'action')
-    commit('mut_Test', '由md模块提交', {root: true})
+    commit('mut_Test', '由md模块提交', { root: true })
   },
 }

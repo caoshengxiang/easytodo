@@ -38,7 +38,7 @@ $axios.interceptors.response.use((response) => {
       setTimeout(() => {
         if (response.data.error.statusCode === '10007') { // 未登录，10007登录过期
           // 后台返回得登录过期，重置登录状态
-          $router.push({name: 'error'})
+          $router.push({ name: 'error' })
           VueCookies.remove('token')
           webStorage.removeItem('userInfo')
         }

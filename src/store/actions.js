@@ -1,4 +1,4 @@
 export default {
-  ac_currentUser ({commit}, data) {
+  ac_currentUser ({ commit }, data) {
   },
 }

@@ -1,14 +1,14 @@
 <template>
   <div class="generate-form">
     <!--<el-row :gutter="20">-->
-      <!--<el-col :span="10">-->
-        <!--<h3 class="view-form-t">表单控件:</h3>-->
-        <!--<original-form></original-form>-->
-      <!--</el-col>-->
-      <!--<el-col :span="14">-->
-        <!--<h3 class="view-form-t">请将表单控件拖至下方并配置:</h3>-->
-        <!--<dev-form @getData="getDataHandle" :initList="initList"></dev-form>-->
-      <!--</el-col>-->
+    <!--<el-col :span="10">-->
+    <!--<h3 class="view-form-t">表单控件:</h3>-->
+    <!--<original-form></original-form>-->
+    <!--</el-col>-->
+    <!--<el-col :span="14">-->
+    <!--<h3 class="view-form-t">请将表单控件拖至下方并配置:</h3>-->
+    <!--<dev-form @getData="getDataHandle" :initList="initList"></dev-form>-->
+    <!--</el-col>-->
     <!--</el-row>-->
     <div style="display: flex">
       <div style="width: 540px;box-sizing: border-box;">
@@ -48,7 +48,8 @@
             action: '',
             headers: {},
             key: 'data.url',
-            callback () {},
+            callback () {
+            },
           }
         },
       },

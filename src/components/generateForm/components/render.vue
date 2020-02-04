@@ -153,7 +153,8 @@
             action: '',
             headers: {},
             key: 'data.url',
-            callback () {},
+            callback () {
+            },
           }
         },
       },
@@ -176,11 +177,13 @@
       padding: 2px 0;
       border: 1px dashed #fff;
       box-sizing: border-box;
+
       &:hover {
         border: 1px dashed #e7e7e7;
         cursor: pointer;
       }
     }
+
     .form-box-item-inline {
       display: inline-block;
     }
@@ -191,6 +194,7 @@
     .el-upload-dragger .el-icon-upload {
       margin: 0;
     }
+
     .el-upload-dragger {
       height: 100px;
     }

@@ -38,7 +38,7 @@
           </div>
 
           <!--<el-form-item size="large">-->
-            <!--<el-button type="primary" @click="onSubmit">生成预览表单</el-button>-->
+          <!--<el-button type="primary" @click="onSubmit">生成预览表单</el-button>-->
           <!--</el-form-item>-->
         </el-form>
       </el-tab-pane>
@@ -195,7 +195,7 @@
         inputValue: '', // tag 输入
         /* 分页 start */
         editableTabsValue: '1',
-        editableTabs: [{name: '1'}],
+        editableTabs: [{ name: '1' }],
         /* 分页 end */
       }
     },
@@ -243,7 +243,8 @@
           type: 'warning',
         }).then(() => {
           this.list2.splice(index, 1)
-        }).catch(() => {})
+        }).catch(() => {
+        })
       },
 
       /* 项的配置处理 start */
@@ -266,7 +267,7 @@
       handleInputConfirm () {
         let inputValue = this.inputValue
         if (inputValue) {
-          this.itemForm.data.push({label: inputValue})
+          this.itemForm.data.push({ label: inputValue })
         }
         this.inputVisible = false
         this.inputValue = ''
@@ -288,8 +289,8 @@
           cancelButtonText: '取消',
           inputPattern: /^.{1,20}$/,
           inputErrorMessage: '20个字符以内',
-        }).then(({value}) => {
-          let newChild = {value: value + Math.random(), label: value}
+        }).then(({ value }) => {
+          let newChild = { value: value + Math.random(), label: value }
           if (!data.children) {
             this.$set(data, 'children', [])
           }
@@ -303,8 +304,8 @@
           cancelButtonText: '取消',
           inputPattern: /^.{1,20}$/,
           inputErrorMessage: '20个字符以内',
-        }).then(({value}) => {
-          const rootNode = {value: value + Math.random(), label: value}
+        }).then(({ value }) => {
+          const rootNode = { value: value + Math.random(), label: value }
           itemForm.data.push(rootNode)
         }).catch(() => {
         })
@@ -366,7 +367,8 @@
 
           this.editableTabsValue = activeName
           this.editableTabs = tabs.filter(tab => tab.name !== targetName)
-        }).catch(() => {})
+        }).catch(() => {
+        })
       },
       /* 分页 end */
     },
@@ -382,6 +384,7 @@
     /*overflow-y: scroll;*/
     .form-box-item-div {
       position: relative;
+
       .operate-box {
         position: absolute;
         z-index: 1000;
@@ -392,12 +395,14 @@
           cursor: pointer;
         }
       }
+
       &:hover {
         .operate-box {
           display: inline-block;
         }
       }
     }
+
     .form-box-item-inline {
       display: inline-block;
     }
@@ -410,6 +415,7 @@
     .el-tag + .el-tag {
       margin-left: 10px;
     }
+
     .button-new-tag {
       margin-left: 10px;
       height: 32px;
@@ -417,6 +423,7 @@
       padding-top: 0;
       padding-bottom: 0;
     }
+
     .input-new-tag {
       width: 90px;
       margin-left: 10px;

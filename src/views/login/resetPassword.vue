@@ -67,18 +67,18 @@
         isRemember: false,
         rules: {
           user: [
-            {required: true, message: '用户名不存在', trigger: 'blur'},
+            { required: true, message: '用户名不存在', trigger: 'blur' },
           ],
           password: [
-            {required: true, message: '请输原始密码', trigger: 'blur'},
+            { required: true, message: '请输原始密码', trigger: 'blur' },
           ],
           newPassword: [
-            {required: true, message: '请输入新密码', trigger: 'blur'},
+            { required: true, message: '请输入新密码', trigger: 'blur' },
             ...chartLengthRule.defaultRule,
           ],
           newPassword2: [
             // {required: true, message: '请再次输入新密码', trigger: 'blur'},
-            {validator: validatePass2, trigger: 'blur'},
+            { validator: validatePass2, trigger: 'blur' },
             ...chartLengthRule.defaultRule,
           ],
         },
@@ -105,7 +105,7 @@
         })
       },
       signIn () {
-        this.$router.push({name: 'signin'})
+        this.$router.push({ name: 'signin' })
       },
       back () {
         this.$router.go(-1)
@@ -128,19 +128,24 @@
   .sign-box {
     width: 440px;
     margin: 100px auto;
+
     .logo-box {
       text-align: center;
+
       span {
         font-size: 34px;
         margin-left: 20px;
       }
     }
+
     .sign-form-box {
       margin: 80px auto 0 auto;
       width: 340px;
+
       .phone {
         position: relative;
       }
+
       .code {
         color: #1E88E5;
         cursor: pointer;
@@ -148,22 +153,27 @@
         right: 10px;
         top: 0px;
         font-size: 12px;
+
         &.time {
           cursor: auto;
         }
       }
+
       .has-account {
         text-align: center;
       }
+
       .forget {
         color: #1E88E5;
         cursor: pointer;
       }
+
       .el-submit {
         width: 50%;
         margin-left: 90px;
         background-color: #FFA94B;
         color: #fff;
+
         &:active {
           color: #FFF;
           border: 1px solid #FFA94B;
@@ -180,6 +190,7 @@
     bottom: 0;
     width: 100%;
     text-align: center;
+
     p {
       position: absolute;
       bottom: 20px;

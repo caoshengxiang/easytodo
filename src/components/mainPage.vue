@@ -11,7 +11,8 @@
             <el-breadcrumb separator-class="el-icon-arrow-right">
               <el-breadcrumb-item v-for="(item, index) in $route.meta.pos"
                                   :key="index"
-                                  :to="{ name: item.name }">{{item.title}}</el-breadcrumb-item>
+                                  :to="{ name: item.name }">{{item.title}}
+              </el-breadcrumb-item>
             </el-breadcrumb>
           </el-header>
           <el-main style="height: 100%;overflow: auto;">
@@ -35,12 +36,9 @@
       mainMenu,
     },
     data () {
-      return {
-
-      }
+      return {}
     },
-    methods: {
-    },
+    methods: {},
     created () {
     },
   }

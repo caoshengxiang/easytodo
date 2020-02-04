@@ -3,7 +3,7 @@
     <div class="sign-box" v-loading="dataLoading"
          element-loading-text="登录中...">
       <div class="logo-box">
-        <img src="../../../public/logo.png" alt="">
+        <!--        <img src="../../../public/logo.png" alt="">-->
         <span>服务后台</span>
       </div>
       <div class="sign-form-box">
@@ -45,11 +45,11 @@
         },
         rules: {
           username: [
-            {required: true, message: '请输入您的登录账号', trigger: 'blur'},
+            { required: true, message: '请输入您的登录账号', trigger: 'blur' },
             // ...chartLengthRule.defaultRule,
           ],
           password: [
-            {required: true, message: '请输入您的登录密码', trigger: 'blur'},
+            { required: true, message: '请输入您的登录密码', trigger: 'blur' },
             // ...chartLengthRule.defaultRule,
           ],
         },
@@ -70,7 +70,7 @@
               pwd = md5(this.formData.password)
             }
             if (this.isRemember) {
-              this.$webStorage.setItem('cacheUser', {user: this.formData.username, password: pwd})
+              this.$webStorage.setItem('cacheUser', { user: this.formData.username, password: pwd })
             } else {
               this.$webStorage.setItem('cacheUser', '')
             }
@@ -85,7 +85,7 @@
             //   })
             this.$webStorage.setItem('userInfo', 123)
             this.$VueCookies.set('token', 123, 2 * 60 * 60) // 时效2小时
-            this.$router.push({name: 'home'})
+            this.$router.push({ name: 'home' })
           } else {
             console.log('error submit!!')
             return false
@@ -97,7 +97,8 @@
           this.submitForm('ruleForm')
         }
       },
-      recoverPassword () {},
+      recoverPassword () {
+      },
     },
     created () {
       if (this.$webStorage.getItem('cacheUser')) {
@@ -117,6 +118,7 @@
       width: 640px;
       margin: 0px auto;
       padding-top: 100px;
+
       .logo-box {
         text-align: center;
         /*display: flex;
@@ -127,11 +129,13 @@
           position: relative;
           top: 24px;
         }
+
         span {
           font-size: 34px;
           margin-left: 20px;
         }
       }
+
       .sign-form-box {
         margin: 66px auto 0 auto;
         width: 100%;
@@ -139,6 +143,7 @@
         box-shadow: 0px 3px 5px #d3f2f2;
         border-top: 6px solid #1496db;
         background-color: #fff;
+
         .forget {
           float: right;
           margin-top: -38px;
@@ -146,10 +151,12 @@
           color: #1496db;
           font-size: 12px;
         }
+
         .el-form-w {
           width: 340px;
           margin: 0 auto;
         }
+
         .el-submit {
           width: 100%;
           /*margin-left: 90px;*/
@@ -158,6 +165,7 @@
           height: 40px;
           font-size: 14px;
           border-radius: 4px;
+
           &:active {
             color: #FFF;
             border: 1px solid #1496db;
@@ -174,6 +182,7 @@
       bottom: 0;
       width: 100%;
       text-align: center;
+
       p {
         position: absolute;
         top: -40px;

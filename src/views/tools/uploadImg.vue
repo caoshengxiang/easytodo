@@ -3,17 +3,17 @@
     <h1 class="com-h1">获取图片地址</h1>
     <div class="com-text">
       <div>
-<!--        <el-upload-->
-<!--          class="avatar-uploader"-->
-<!--          :headers="{authKey: userInfo.authKey}"-->
-<!--          :action="serverUrl + '/file/upload'"-->
-<!--          :show-file-list="false"-->
-<!--          :on-success="successHandleIcon">-->
-<!--          <img v-if="detail.iconUrl" :src="detail.iconUrl" class="avatar" style="max-width: 400px;">-->
-<!--          <i v-else class="el-icon-plus avatar-uploader-icon"></i>-->
-<!--        </el-upload>-->
+        <!--        <el-upload-->
+        <!--          class="avatar-uploader"-->
+        <!--          :headers="{authKey: userInfo.authKey}"-->
+        <!--          :action="serverUrl + '/file/upload'"-->
+        <!--          :show-file-list="false"-->
+        <!--          :on-success="successHandleIcon">-->
+        <!--          <img v-if="detail.iconUrl" :src="detail.iconUrl" class="avatar" style="max-width: 400px;">-->
+        <!--          <i v-else class="el-icon-plus avatar-uploader-icon"></i>-->
+        <!--        </el-upload>-->
 
-<!---->
+        <!---->
         <el-upload class="avatar-uploader" action="" :show-file-list="false" :before-upload="beforeAvatarUpload">
           <img v-if="ruleForm.logo" :src="ruleForm.logo" class="avatar" style="max-width: 100%">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>

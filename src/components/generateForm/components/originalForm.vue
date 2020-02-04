@@ -66,10 +66,12 @@
   .form-box-cpt {
     border: 1px solid #ccc;
     padding: 20px;
+
     .form-box-item-div {
       .operate-box {
       }
     }
+
     .upload-demo {
     }
   }
