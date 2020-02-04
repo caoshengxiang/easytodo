@@ -3,7 +3,7 @@
     <div class="sign-box" v-loading="dataLoading"
          element-loading-text="登录中...">
       <div class="logo-box">
-        <img src="../../../public/logo.png" alt="">
+<!--        <img src="../../../public/logo.png" alt="">-->
         <span>服务后台</span>
       </div>
       <div class="sign-form-box">
