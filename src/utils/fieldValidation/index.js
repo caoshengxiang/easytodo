@@ -62,5 +62,5 @@ export const validate = {
 }
 
 /* 使用
-* 参考test.vue
+* 参考elForm
 * */

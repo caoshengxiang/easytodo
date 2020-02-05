@@ -16,7 +16,7 @@ const router = new Router({
       // name: 'HelloWorld',
       // component: HelloWorld
       name: 'root',
-      redirect: '/web/home',
+      redirect: '/demo/map',
     },
     {
       path: '/login',
@@ -34,6 +34,22 @@ const router = new Router({
       meta: {
         authKey: false,
       },
+    },
+    {
+      path: '/demo',
+      name: 'demo',
+      component: () => import('./demo/router-v'),
+      children: [
+        {
+          path: 'map',
+          name: 'map',
+          component: () => import('./demo/map/map'),
+          meta: {
+            title: '地图',
+            pos: [{ title: '地图', name: 'map' }]
+          },
+        },
+      ]
     },
     {
       path: '/web',
