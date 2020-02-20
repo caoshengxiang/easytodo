@@ -8,7 +8,7 @@ import mainPage from './components/mainPage'
 Vue.use(Router)
 
 const router = new Router({
-  mode: 'history',
+  // mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
@@ -16,7 +16,7 @@ const router = new Router({
       // name: 'HelloWorld',
       // component: HelloWorld
       name: 'root',
-      redirect: '/demo/map',
+      redirect: '/data/v',
     },
     {
       path: '/login',
@@ -36,10 +36,41 @@ const router = new Router({
       },
     },
     {
+      path: '/data',
+      name: 'data',
+      component: () => import('./demo/router-v'),
+      children: [
+        {
+          path: 'v',
+          name: 'v',
+          component: () => import('./datav/data-bicycle/data-v'),
+          meta: {
+            title: '高新区共享单车智慧治理平台',
+          },
+        },
+        {
+          path: 'map',
+          name: 'map',
+          component: () => import('./datav/data-map/map-v'),
+          meta: {
+            title: '高新区共享单车智慧治理平台',
+          },
+        },
+      ]},
+    {
       path: '/demo',
       name: 'demo',
       component: () => import('./demo/router-v'),
       children: [
+        {
+          path: 'test',
+          name: 'test',
+          component: () => import('./demo/border/test'),
+          meta: {
+            title: '地图',
+            pos: [{ title: '地图', name: 'map' }]
+          },
+        },
         {
           path: 'map',
           name: 'map',
@@ -47,6 +78,14 @@ const router = new Router({
           meta: {
             title: '地图',
             pos: [{ title: '地图', name: 'map' }]
+          },
+        }, {
+          path: 'border',
+          name: 'border',
+          component: () => import('./demo/border/border'),
+          meta: {
+            title: '边界',
+            pos: [{ title: '边界', name: 'map' }]
           },
         },
       ]

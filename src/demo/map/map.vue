@@ -47,8 +47,9 @@
 
       <!--折线-->
       <bm-control offset="20">
-        <button class="btn-1" @click="toggle('polyline')">{{ polyline.editing ? '停止绘制' : '绘制边界' }}</button>
-        <button class="btn-2" v-if="!polyline.editing && polyline.paths.length" @click="drowPolygon">生成边界</button>
+        <button class="btn-1" @click.stop="toggle('polyline')">{{ polyline.editing ? '停止绘制(先鼠标右键完成当前区域)' : '绘制边界' }}
+        </button>
+        <button class="btn-2" v-if="!polyline.editing && polyline.paths.length" @click.stop="drowPolygon">生成边界</button>
       </bm-control>
       <bm-polyline strokeColor="#801915" :strokeWeight="1" :path="path" :key="'101'+index"
                    v-for="(path, index) in polyline.paths">
@@ -75,12 +76,12 @@
       width="300px"
     >
       <p>
-        <el-button style="width: 100%" type="primary" @click="edit" v-if="editPolygItem.editing">保存</el-button>
+        <el-button style="width: 100%" type="primary" @click="edit" v-if="editPolygItem.editing">确定</el-button>
         <el-button style="width: 100%" type="primary" @click="edit" v-else>编辑</el-button>
       </p>
-<!--      <p style="margin: 10px;" v-if="editPolygItem.editing">-->
-<!--        <el-button style="width: 100%" type="primary" @click="delPoint">删除最后一个点</el-button>-->
-<!--      </p>-->
+      <!--      <p style="margin: 10px;" v-if="editPolygItem.editing">-->
+      <!--        <el-button style="width: 100%" type="primary" @click="delPoint">删除最后一个点</el-button>-->
+      <!--      </p>-->
       <p style="margin: 10px;">
         <el-button style="width: 100%" type="danger" @click="del">删除</el-button>
       </p>
@@ -98,7 +99,7 @@
   import { BmBoundary, BmMarker, BmControl, BmPolyline, BmPolygon } from 'vue-baidu-map'
   import myOverlay from './myOverlay'
   // 百度地图 end
-  import { styleJson, mapdata } from './styleJson'
+  import { styleJson, mapdata, coordinates } from './styleJson'
 
   export default {
     name: 'map-test',
@@ -248,7 +249,7 @@
         this.editPolygItem.editing = !this.editPolygItem.editing
         this.dialogVisible = false
       },
-      delPoint() {
+      delPoint () {
         if (!this.editPolygItem.paths) {
           return
         }
@@ -280,7 +281,20 @@
       /*多边形*/
     },
     created () {
-      // this.addPoints()
+      let paths = []
+      coordinates.forEach(item => {
+
+        paths.push({
+          lng: item[0],
+          lat: item[1]
+        })
+      })
+      this.polygonPaths.push({
+        editing: false,
+        paths: paths
+      })
+      // eslint-disable-next-line no-console
+      console.log(this.polygonPaths)
     }
   }
 </script>

@@ -13,8 +13,15 @@ import moment from 'moment'
 import webStorage from 'webStorage'
 import VueCookies from 'vue-cookies'
 
+// 将自动注册所有组件为全局组件 data-v
+import dataV from '@jiaminghi/data-view'
+
+// echarts
+import echarts from 'echarts'
+
 Vue.use(vDialogs)
 Vue.use(animated)
+Vue.use(dataV)
 
 Vue.prototype.$moment = (t, format) => {
   if (!t) {
@@ -29,3 +36,4 @@ Vue.prototype.$moment = (t, format) => {
 Vue.prototype.$webStorage = webStorage
 VueCookies.config(2 * 60 * 60) // 单位秒，配置默认有效期
 Vue.prototype.$VueCookies = VueCookies
+Vue.prototype.$echarts = echarts
