@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import mainPage from './components/mainPage'
-// import VueCookies from 'vue-cookies'
-// import API from './utils/api'
-// import { Loading } from 'element-ui'
+import VueCookies from 'vue-cookies'
+import API from './utils/api'
+import { Loading } from 'element-ui'
+import md5 from 'js-md5'
 
 Vue.use(Router)
 
@@ -56,7 +57,8 @@ const router = new Router({
             title: '高新区共享单车智慧治理平台',
           },
         },
-      ]},
+      ]
+    },
     {
       path: '/demo',
       name: 'demo',
@@ -194,49 +196,14 @@ router.beforeEach((to, from, next) => {
   } else {
     document.title = 'easy todo'
   }
-  // if (to.query.token) { // 获取token
-  //   const Token = to.query.token
-  //   if (Token) {
-  //     VueCookies.set('token', Token, 6 * 60 * 60)
-  //   }
-  // }
-  if (to.meta.authKey) {
-    /* let token = VueCookies.get('token')
-     if (token) {
-       const loading = Loading.service({
-         lock: true,
-         text: 'Loading',
-         spinner: 'el-icon-loading',
-         background: 'rgba(0, 0, 0, 0.7)'
-       })
-       API.other.checkToken({token: token}).then( // 检测token
-         da => {
-           if (da) {
-             loading.close()
-             next()
-           } else {
-             loading.close()
-             next({
-               path: '/error',
-               // query: {
-               //   backUrl: to.fullPath,
-               // }, // 将跳转的路由path作为参数，登录成功后跳转到该路由
-             })
-           }
-         },
-       )
-     } else {
-       next({
-         path: '/error',
-         // query: {
-         //   backUrl: to.fullPath,
-         // }, // 将跳转的路由path作为参数，登录成功后跳转到该路由
-       })
-     } */
+
+  API.account.login({
+    username: 'bigstatics',
+    password: md5('bike123456'),
+  }).then(da => {
+    VueCookies.set('token', da.data.token, 60 * 24 * 60 * 60)
     next()
-  } else {
-    next()
-  }
+  })
 })
 
 // 路由切换时回到页面顶部

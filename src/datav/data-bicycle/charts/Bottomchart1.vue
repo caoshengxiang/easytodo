@@ -5,6 +5,10 @@
 </template>
 
 <script>
+  import API from '../../../utils/api'
+  import chartColors from './chartColors'
+  import { apiTime } from './config'
+
   export default {
     name: 'Bottomchart1',
     data () {
@@ -23,7 +27,7 @@
           },
           legend: {
             data: ['已完成', '未完成'],
-            textStyle:{
+            textStyle: {
               // fontSize: 14, // 字体大小
               color: '#ffffff' // 字体颜色
             },
@@ -36,7 +40,7 @@
           },
           xAxis: {
             type: 'category',
-            data: ['哈罗', '美团', '青桔', '摩拜'],
+            // data: ['哈罗', '美团', '青桔', '摩拜'],
             axisLabel: {
               show: true,
               textStyle: {
@@ -48,7 +52,7 @@
             type: 'value',
             boundaryGap: [0, 0.01],
             name: '数量',
-            nameTextStyle:{
+            nameTextStyle: {
               color: '#ffffff',
             },
             axisLabel: {
@@ -59,7 +63,7 @@
             //网格样式
             splitLine: {
               show: true,
-              lineStyle:{
+              lineStyle: {
                 color: ['#1e2c4a'],
                 width: 1,
                 type: 'solid'
@@ -70,12 +74,12 @@
             {
               name: '已完成',
               type: 'bar',
-              data: [182, 234, 290, 109],
-              itemStyle : { // 折线样式
-                normal : {
-                  color:'#3468FF', // 折点样式
-                  lineStyle:{
-                    color:'#3468FF'
+              // data: [182, 234, 290, 109],
+              itemStyle: { // 折线样式
+                normal: {
+                  color: '#3468FF', // 折点样式
+                  lineStyle: {
+                    color: '#3468FF'
                   }
                 }
               },
@@ -83,12 +87,12 @@
             {
               name: '未完成',
               type: 'bar',
-              data: [135, 138, 131, 194],
-              itemStyle : { // 折线样式
-                normal : {
-                  color:'#86F3FF', // 折点样式
-                  lineStyle:{
-                    color:'#86F3FF'
+              // data: [135, 138, 131, 194],
+              itemStyle: { // 折线样式
+                normal: {
+                  color: '#86F3FF', // 折点样式
+                  lineStyle: {
+                    color: '#86F3FF'
                   }
                 }
               },
@@ -97,10 +101,45 @@
         }
       }
     },
+    methods: {
+      getData () {
+        API.v1.bottom1({
+          // time: this.$moment(new Date()),
+          // days: 7
+        }).then(da => {
+          this.options.xAxis.data = da.data.outData
+          let names = []
+          this.options.series = da.data.value.map((item, index) => {
+            names.push(item.name)
+            let color = ['#3468FF', '#86F3FF']
+            return {
+              name: item.name,
+              type: 'bar',
+              data: item.data,
+              itemStyle: { // 折线样式
+                normal: {
+                  color: color[index], // 折点样式
+                  lineStyle: {
+                    color: color[index]
+                  }
+                }
+              },
+            }
+          })
+          this.chart.setOption(this.options)
+        })
+      }
+    },
+    created () {
+      // this.getData()
+    },
     mounted () {
       this.chart = this.$echarts.init(document.getElementById('bottomChart1'))
-      this.chart.setOption(this.options)
-    }
+      this.getData()
+      setInterval(() => {
+        this.getData()
+      }, apiTime)
+    },
   }
 </script>
 

@@ -6,6 +6,8 @@
 
 <script>
   import chartColors from './chartColors'
+  import API from '../../../utils/api'
+  import { apiTime } from './config'
 
   export default {
     name: 'leftChart2',
@@ -70,7 +72,8 @@
               }
             },
             boundaryGap: false,
-            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+            // data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+            data: []
           },
           yAxis: {
             name: '时间(h)',
@@ -94,77 +97,114 @@
             }
           },
           series: [
-            {
-              name: '哈罗',
+            // {
+            //   name: '哈罗',
+            //   type: 'line',
+            //   stack: '总量1',
+            //   data: [12, 13, 10, 13, 9, 23, 21],
+            //   itemStyle: { // 折线样式
+            //     normal: {
+            //       color: chartColors[0], // 折点样式
+            //       lineStyle: {
+            //         color: chartColors[0]
+            //       }
+            //     }
+            //   },
+            //   symbol: 'none', //去掉折线图中的节点
+            //   smooth: true  //true 为平滑曲线，false为直线
+            // },
+            // {
+            //   name: '美团',
+            //   type: 'line',
+            //   stack: '总量2',
+            //   data: [22, 18, 19, 23, 29, 33, 31],
+            //   itemStyle: { // 折线样式
+            //     normal: {
+            //       color: chartColors[1],
+            //       lineStyle: {
+            //         color: chartColors[1]
+            //       }
+            //     }
+            //   },
+            //   symbol: 'none', //去掉折线图中的节点
+            //   smooth: true  //true 为平滑曲线，false为直线
+            // },
+            // {
+            //   name: '青桔',
+            //   type: 'line',
+            //   stack: '总量3',
+            //   data: [15, 23, 20, 15, 19, 33, 41],
+            //   itemStyle: { // 折线样式
+            //     normal: {
+            //       color: chartColors[2],
+            //       lineStyle: {
+            //         color: chartColors[2]
+            //       }
+            //     }
+            //   },
+            //   symbol: 'none', //去掉折线图中的节点
+            //   smooth: true  //true 为平滑曲线，false为直线
+            // },
+            // {
+            //   name: '摩拜',
+            //   type: 'line',
+            //   stack: '总量4',
+            //   data: [32, 33, 30, 33, 39, 33, 32],
+            //   itemStyle: { // 折线样式
+            //     normal: {
+            //       color: chartColors[3],
+            //       lineStyle: {
+            //         color: chartColors[3]
+            //       }
+            //     }
+            //   },
+            //   symbol: 'none', //去掉折线图中的节点
+            //   smooth: true  //true 为平滑曲线，false为直线
+            // }
+          ]
+        }
+      }
+    },
+    methods: {
+      getData () {
+        API.v1.left2({
+          // time: this.$moment(new Date()),
+          // days: 7
+        }).then(da => {
+          this.options.xAxis.data = da.data.outData
+          let names = []
+          this.options.series = da.data.value.map((item, index) => {
+            names.push(item.name)
+            return {
+              name: item.name,
               type: 'line',
-              stack: '总量1',
-              data: [12, 13, 10, 13, 9, 23, 21],
+              stack: '总量'+ index,
+              data: item.data,
               itemStyle: { // 折线样式
                 normal: {
-                  color: chartColors[0], // 折点样式
+                  color: chartColors[index], // 折点样式
                   lineStyle: {
-                    color: chartColors[0]
-                  }
-                }
-              },
-              symbol: 'none', //去掉折线图中的节点
-              smooth: true  //true 为平滑曲线，false为直线
-            },
-            {
-              name: '美团',
-              type: 'line',
-              stack: '总量2',
-              data: [22, 18, 19, 23, 29, 33, 31],
-              itemStyle: { // 折线样式
-                normal: {
-                  color: chartColors[1],
-                  lineStyle: {
-                    color: chartColors[1]
-                  }
-                }
-              },
-              symbol: 'none', //去掉折线图中的节点
-              smooth: true  //true 为平滑曲线，false为直线
-            },
-            {
-              name: '青桔',
-              type: 'line',
-              stack: '总量3',
-              data: [15, 23, 20, 15, 19, 33, 41],
-              itemStyle: { // 折线样式
-                normal: {
-                  color: chartColors[2],
-                  lineStyle: {
-                    color: chartColors[2]
-                  }
-                }
-              },
-              symbol: 'none', //去掉折线图中的节点
-              smooth: true  //true 为平滑曲线，false为直线
-            },
-            {
-              name: '摩拜',
-              type: 'line',
-              stack: '总量4',
-              data: [32, 33, 30, 33, 39, 33, 32],
-              itemStyle: { // 折线样式
-                normal: {
-                  color: chartColors[3],
-                  lineStyle: {
-                    color: chartColors[3]
+                    color: chartColors[index]
                   }
                 }
               },
               symbol: 'none', //去掉折线图中的节点
               smooth: true  //true 为平滑曲线，false为直线
             }
-          ]
-        }
+          })
+          this.chart.setOption(this.options)
+        })
       }
+    },
+    created () {
+
     },
     mounted () {
       this.chart = this.$echarts.init(document.getElementById('leftChart2'))
-      this.chart.setOption(this.options)
+      this.getData()
+      setInterval(() => {
+        this.getData()
+      }, apiTime)
     }
   }
 </script>

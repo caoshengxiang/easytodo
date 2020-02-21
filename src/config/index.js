@@ -34,6 +34,6 @@ Vue.prototype.$moment = (t, format) => {
   return moment(t).format(format)
 }
 Vue.prototype.$webStorage = webStorage
-VueCookies.config(2 * 60 * 60) // 单位秒，配置默认有效期
+VueCookies.config(60 * 24 * 60 * 60) // 单位秒，配置默认有效期
 Vue.prototype.$VueCookies = VueCookies
 Vue.prototype.$echarts = echarts

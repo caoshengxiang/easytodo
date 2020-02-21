@@ -4,7 +4,7 @@
       <dv-active-ring-chart class="rc2-chart" :config="config"/>
     </div>
     <div class="f-2">
-      <div class="num">无牌照投放<span>21000</span>辆</div>
+      <div class="num">无牌照投放<span>{{total}}</span>辆</div>
       <div class="rc-chart" id="rcChart"></div>
     </div>
   </div>
@@ -12,6 +12,8 @@
 
 <script>
   import chartColors from './chartColors'
+  import API from '../../../utils/api'
+  import { apiTime } from './config'
 
   export default {
     name: 'RightChart2',
@@ -72,7 +74,8 @@
           },
           yAxis: {
             type: 'category',
-            data: ['哈罗', '美团', '青桔', '摩拜'],
+            // data: ['哈罗', '美团', '青桔', '摩拜'],
+            data: [],
             axisLabel: {
               textStyle: {
                 color: '#ffffff'
@@ -80,7 +83,8 @@
             },
           },
           series: [{
-            data: [120, 200, 600, 800],
+            // data: [120, 200, 600, 800],
+            data: [],
             type: 'bar',
             barWidth: '50%',
             itemStyle: {
@@ -93,12 +97,47 @@
               }
             }
           }]
-        }
+        },
+        total: 0,
       }
+    },
+    methods: {
+      getData () {
+        API.v1.right2({
+          // time: this.$moment(new Date()),
+          // days: 7
+        }).then(da => {
+          let yAxis = []
+          let series = []
+          let sum = 0
+          let data = da.data.map(item => {
+            let value = parseInt(item.value, 10)
+            sum += value
+            yAxis.push(item.name)
+            series.push(item.value)
+            return {
+              name: item.name,
+              value: value
+            }
+          })
+          this.total = sum
+          this.config = {data: data}
+          this.options.series[0].data = series
+          this.options.yAxis.data = yAxis
+          this.chart.setOption(this.options)
+        })
+      }
+    },
+    created () {
+      // this.getData()
     },
     mounted () {
       this.chart = this.$echarts.init(document.getElementById('rcChart'))
-      this.chart.setOption(this.options)
+      // this.chart.setOption(this.options)
+      this.getData()
+      setInterval(() => {
+        this.getData()
+      }, apiTime * 6 * 60)
     }
   }
 </script>

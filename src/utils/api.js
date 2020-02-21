@@ -13,10 +13,10 @@
 import $axios from '../utils/axiosConfig' // axios配置文件
 
 export default {
-  area: {
-    add (params) {
+  account: {
+    login (params) {
       return new Promise((resolve, reject) => {
-        $axios.post('area/add', params).then((res) => {
+        $axios.post('auth/loginV2', params).then((res) => {
           resolve(res.data)
         }).catch((err) => {
           reject(new Error(err))
@@ -33,35 +33,78 @@ export default {
       })
     },
   },
-  user: {
-    userList (params) {
+  v1: {
+    left1 (params) {
       return new Promise((resolve, reject) => {
-        $axios.post('users/userList', {
-          params: params,
-        }).then((res) => {
+        $axios.get('supervisor/statistic/illegalAmount', {params: params}).then((res) => {
           resolve(res.data)
         }).catch((err) => {
           reject(new Error(err))
         })
       })
     },
-    modifyStaff (params) { // 账户修改
+    left2 (params) {
       return new Promise((resolve, reject) => {
-        $axios.post('staff', params).then((res) => {
+        $axios.get('supervisor/statistic/avgHandleTaskTime', {params: params}).then((res) => {
           resolve(res.data)
         }).catch((err) => {
           reject(new Error(err))
         })
       })
     },
-    singlePass (params) { // 单个满勤
+    right1 (params) {
       return new Promise((resolve, reject) => {
-        $axios.put('staffAttendance/singlePass', params).then((res) => {
+        $axios.get('supervisor/statistic/putInCounts', {params: params}).then((res) => {
           resolve(res.data)
         }).catch((err) => {
           reject(new Error(err))
         })
       })
     },
-  },
+    right2 (params) {
+      return new Promise((resolve, reject) => {
+        $axios.get('supervisor/statistic/unlicensedPutsCount', {params: params}).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+    bottom1 (params) {
+      return new Promise((resolve, reject) => {
+        $axios.get('supervisor/statistic/taskCompleted', {params: params}).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+    bottom2 (params) {
+      return new Promise((resolve, reject) => {
+        $axios.get('', {params: params}).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+    bottom3 (params) {
+      return new Promise((resolve, reject) => {
+        $axios.get('', {params: params}).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+    bottom4 (params) {
+      return new Promise((resolve, reject) => {
+        $axios.get('supervisor/statistic/latestTask', {params: params}).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+  }
 }
