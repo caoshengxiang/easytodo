@@ -81,7 +81,7 @@ export default {
     },
     bottom2 (params) {
       return new Promise((resolve, reject) => {
-        $axios.get('', {params: params}).then((res) => {
+        $axios.get('supervisor/statistic/usedRatesTrends', {params: params}).then((res) => {
           resolve(res.data)
         }).catch((err) => {
           reject(new Error(err))
@@ -90,7 +90,7 @@ export default {
     },
     bottom3 (params) {
       return new Promise((resolve, reject) => {
-        $axios.get('', {params: params}).then((res) => {
+        $axios.get('supervisor/statistic/parkingUsedRate', {params: params}).then((res) => {
           resolve(res.data)
         }).catch((err) => {
           reject(new Error(err))
@@ -100,6 +100,15 @@ export default {
     bottom4 (params) {
       return new Promise((resolve, reject) => {
         $axios.get('supervisor/statistic/latestTask', {params: params}).then((res) => {
+          resolve(res.data)
+        }).catch((err) => {
+          reject(new Error(err))
+        })
+      })
+    },
+    center (params) {
+      return new Promise((resolve, reject) => {
+        $axios.get('supervisor/statistic/bikeAndillegalTotal', {params: params}).then((res) => {
           resolve(res.data)
         }).catch((err) => {
           reject(new Error(err))

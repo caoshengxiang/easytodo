@@ -42,10 +42,10 @@
             <div class="dialog">
               <img class="jiantou" src="./img/jiantou.png" alt="">
               <div>
-                单车总数：302000 辆
+                单车总数：{{detail[0]}} 辆
               </div>
               <div>
-                违章总数：2001
+                违章总数：{{detail[1]}}
               </div>
             </div>
           </div>
@@ -58,13 +58,32 @@
 
 <script>
   import $ from 'jquery'
+  import API from '../../utils/api'
+  import { apiTime } from './charts/config'
 
   export default {
     name: 'mapCenter',
     data () {
       return {
-        visible: true
+        visible: true,
+        detail: [0,0]
       }
+    },
+    methods: {
+      getData () {
+        API.v1.center({
+          // time: this.$moment(new Date()),
+          // days: 7
+        }).then(da => {
+          this.detail = da.data
+        })
+      }
+    },
+    created () {
+      this.getData()
+      setInterval(() => {
+        this.getData()
+      }, apiTime)
     },
     mounted () {
       setInterval(() => {

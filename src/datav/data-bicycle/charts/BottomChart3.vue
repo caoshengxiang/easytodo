@@ -5,6 +5,9 @@
 </template>
 
 <script>
+  import API from '../../../utils/api'
+  import { apiTime } from './config'
+
   export default {
     name: 'Bottomchart3',
     data () {
@@ -34,7 +37,25 @@
           ]
         }
       }
-    }
+    },
+    methods: {
+      getData () {
+        API.v1.bottom3({
+          // time: this.$moment(new Date()),
+          // days: 7
+        }).then(da => {
+          this.config = {
+            data: da.data
+          }
+        })
+      }
+    },
+    created () {
+      this.getData()
+      setInterval(() => {
+        this.getData()
+      }, apiTime)
+    },
   }
 </script>
 

@@ -5,6 +5,10 @@
 </template>
 
 <script>
+  import API from '../../../utils/api'
+  import chartColors from './chartColors'
+  import { apiTime } from './config'
+
   export default {
     name: 'BottomChart2',
     data () {
@@ -41,7 +45,8 @@
             }
           },
           legend: {
-            data: ['天府五街', '天府三街', '世纪城', '高新', '孵化园'],
+            // data: ['天府五街', '天府三街', '世纪城', '高新', '孵化园'],
+            data: [],
             textStyle: {
               // fontSize: 14, // 字体大小
               color: '#ffffff' // 字体颜色
@@ -61,7 +66,8 @@
           xAxis: {
             type: 'category',
             boundaryGap: false,
-            data: ['2020-01-01', '2020-01-02', '2020-01-03', '2020-01-04', '2020-01-05', '2020-01-06', '2020-01-07'],
+            // data: ['2020-01-01', '2020-01-02', '2020-01-03', '2020-01-04', '2020-01-05', '2020-01-06', '2020-01-07'],
+            data: [],
             axisLabel: {
               show: true,
               textStyle: {
@@ -91,53 +97,86 @@
             }
           },
           series: [
-            {
-              name: '天府五街',
-              type: 'line',
-              // stack: '总量1',
-              data: [12, 13, 10, 13, 9, 23, 21],
-              symbol:'none', //去掉折线图中的节点
-              smooth: true  //true 为平滑曲线，false为直线
-            },
-            {
-              name: '天府三街',
-              type: 'line',
-              // stack: '总量2',
-              data: [22, 18, 19, 23, 29, 33, 31],
-              symbol:'none', //去掉折线图中的节点
-              smooth: true  //true 为平滑曲线，false为直线
-            },
-            {
-              name: '世纪城',
-              type: 'line',
-              // stack: '总量3',
-              data: [15, 23, 20, 15, 19, 33, 41],
-              symbol:'none', //去掉折线图中的节点
-              smooth: true  //true 为平滑曲线，false为直线
-            },
-            {
-              name: '高新',
-              type: 'line',
-              // stack: '总量4',
-              data: [32, 33, 30, 33, 39, 33, 32],
-              symbol:'none', //去掉折线图中的节点
-              smooth: true  //true 为平滑曲线，false为直线
-            },
-            {
-              name: '孵化园',
-              type: 'line',
-              // stack: '总量5',
-              data: [10, 12, 18, 20, 21, 19, 30],
-              symbol:'none', //去掉折线图中的节点
-              smooth: true  //true 为平滑曲线，false为直线
-            }
+            // {
+            //   name: '天府五街',
+            //   type: 'line',
+            //   // stack: '总量1',
+            //   data: [12, 13, 10, 13, 9, 23, 21],
+            //   symbol:'none', //去掉折线图中的节点
+            //   smooth: true  //true 为平滑曲线，false为直线
+            // },
+            // {
+            //   name: '天府三街',
+            //   type: 'line',
+            //   // stack: '总量2',
+            //   data: [22, 18, 19, 23, 29, 33, 31],
+            //   symbol:'none', //去掉折线图中的节点
+            //   smooth: true  //true 为平滑曲线，false为直线
+            // },
+            // {
+            //   name: '世纪城',
+            //   type: 'line',
+            //   // stack: '总量3',
+            //   data: [15, 23, 20, 15, 19, 33, 41],
+            //   symbol:'none', //去掉折线图中的节点
+            //   smooth: true  //true 为平滑曲线，false为直线
+            // },
+            // {
+            //   name: '高新',
+            //   type: 'line',
+            //   // stack: '总量4',
+            //   data: [32, 33, 30, 33, 39, 33, 32],
+            //   symbol:'none', //去掉折线图中的节点
+            //   smooth: true  //true 为平滑曲线，false为直线
+            // },
+            // {
+            //   name: '孵化园',
+            //   type: 'line',
+            //   // stack: '总量5',
+            //   data: [10, 12, 18, 20, 21, 19, 30],
+            //   symbol:'none', //去掉折线图中的节点
+            //   smooth: true  //true 为平滑曲线，false为直线
+            // }
           ]
         }
       }
     },
+    methods: {
+      getData () {
+        API.v1.bottom2({
+          // time: this.$moment(new Date()),
+          // days: 7
+        }).then(da => {
+          this.options.legend.data = da.data.outData
+          this.options.xAxis.data = da.data.outData2
+          this.options.series = da.data.value.map((item, index) => {
+            return {
+              name: item.name,
+              type: 'line',
+              stack: '总量'+ index,
+              data: item.data,
+              // itemStyle: { // 折线样式
+              //   normal: {
+              //     color: chartColors[index], // 折点样式
+              //     lineStyle: {
+              //       color: chartColors[index]
+              //     }
+              //   }
+              // },
+              symbol: 'none', //去掉折线图中的节点
+              smooth: true  //true 为平滑曲线，false为直线
+            }
+          })
+          this.chart.setOption(this.options)
+        })
+      }
+    },
     mounted () {
       this.chart = this.$echarts.init(document.getElementById('bottomChart2'))
-      this.chart.setOption(this.options)
+      this.getData()
+      setInterval(() => {
+        this.getData()
+      }, apiTime)
     }
   }
 </script>
