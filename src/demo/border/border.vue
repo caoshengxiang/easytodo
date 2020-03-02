@@ -272,22 +272,22 @@
       //     paths: paths
       //   })
       // })
-      // quxian.data.forEach(item => {
-      //   if (item.id == '510109') {
-      //     let coordinates = JSON.parse(item.coordinates)
-      //     let paths = []
-      //     coordinates[0].forEach(item => {
-      //       paths.push({
-      //         lng: item[0],
-      //         lat: item[1]
-      //       })
-      //     })
-      //     this.polygonPaths.push({
-      //       editing: false,
-      //       paths: paths
-      //     })
-      //   }
-      // })
+      quxian.data.forEach(item => {
+        if (item.id == '510109' || item.id == '510107') {
+          let coordinates = JSON.parse(item.coordinates)
+          let paths = []
+          coordinates[0].forEach(item => {
+            paths.push({
+              lng: item[0],
+              lat: item[1]
+            })
+          })
+          this.polygonPaths.push({
+            editing: false,
+            paths: paths
+          })
+        }
+      })
 
       // eslint-disable-next-line no-console
       console.log(this.polygonPaths)
