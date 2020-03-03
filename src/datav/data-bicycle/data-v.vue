@@ -1,6 +1,7 @@
 <template>
   <div class="data-bicycle">
-    <dv-full-screen-container class="dv-full-s-c">
+<!--    <div class="dv-full-s-c">-->
+          <dv-full-screen-container class="dv-full-s-c">
       <div class="main-header"><span>共享单车综合智慧治理平台</span></div>
       <div class="con">
         <div class="top-con">
@@ -88,7 +89,8 @@
           </div>
         </div>
       </div>
-    </dv-full-screen-container>
+          </dv-full-screen-container>
+<!--    </div>-->
   </div>
 </template>
 
