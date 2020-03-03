@@ -1,8 +1,17 @@
 <template>
   <div class="ani-box">
-    <div class="ani-1"></div>
-    <div class="ani-2"></div>
-    <div class="map-center">
+    <div class="pos">
+      <div class="ani-box-1">
+        <div class="ani-1"></div>
+      </div>
+    </div>
+    <div class="pos">
+      <div class="ani-box-2">
+        <div class="ani-2"></div>
+      </div>
+    </div>
+    <div class="pos">
+      <div class="map-center">
       <div class="map">
         <div>
           <img class="map-item map1" src="./img/map/成华区@2x.png" alt="">
@@ -50,6 +59,7 @@
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
 
@@ -99,73 +109,70 @@
 <style scoped lang="less">
   @keyframes rotate {
     0% {
-      transform: rotateZ(0deg) scale(1.4);
+      transform: rotateZ(0deg);
     }
     100% {
-      transform: rotateZ(180deg) scale(1.4);
+      transform: rotateZ(180deg);
     }
   }
   @keyframes rotate2 {
     0% {
-      transform: scale(1.11) rotateZ(0deg) rotateY(0deg) rotateX(0deg);
+      transform: rotateZ(0deg) rotateY(0deg) rotateX(0deg);
     }
     30% {
-      transform: scale(1.11) rotateZ(180deg) rotateY(0deg) rotateX(0deg);
+      transform: rotateZ(180deg) rotateY(0deg) rotateX(0deg);
     }
     60% {
-      transform: scale(1.11) rotateZ(270deg) rotateY(180deg) rotateX(0deg);
+      transform: rotateZ(270deg) rotateY(180deg) rotateX(0deg);
     }
     100% {
-      transform: scale(1.11) rotateZ(360deg) rotateY(360deg) rotateX(0deg);
+      transform: rotateZ(360deg) rotateY(360deg) rotateX(0deg);
     }
   }
   .ani-box {
     width: 100%;
     height: 100%;
     position: relative;
+    .pos {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      line-height: 100%;
+    }
+    .ani-box-1, .ani-box-2 {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     .ani-1 {
       background-image: url("./img/map/ball.png");
       background-size: 100% 100%;
       background-repeat: no-repeat;
-      width: 460px;
-      height: 460px;
-      position: absolute;
-      /*top: 46px;*/
-      /*left: 128px;*/
-      top: 47px;
-      left: 130px;
-      /*border-radius: 50%;*/
+      width: 760px;
+      height: 760px;
+      margin-left: 10px;
       /*animation: rotate 8s infinite linear normal;*/
       /*animation: rotate 8s infinite ease alternate;*/
       animation: rotate 60s infinite linear alternate;
-      /*transform: scale(1.4);*/
     }
     .ani-2 {
       background-image: url("./img/map/ring.png");
       background-size: 100% 100%;
-      width: 500px;
-      height: 500px;
-      position: absolute;
-      top: 25px;
-      left: 110px;
-      /*border-radius: 50%;*/
+      width: 660px;
+      height: 660px;
       animation: rotate2 40s infinite linear alternate;
-      /*transform: scale(1.1);*/
     }
   }
 
   .map-center {
-    width: calc(100% - 20px);
-    height: calc(100% - 40px);
-    /*margin-top: 40px;*/
-    padding-top: 40px;
-    box-sizing: border-box;
-    margin-left: 10px;
-    margin-right: 10px;
+    width: 100%;
+    height: 100%;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
-
+    position: absolute;
     .map {
       position: relative;
       width: 460px;
