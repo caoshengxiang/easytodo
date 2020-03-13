@@ -49,7 +49,7 @@
               // fontSize: 14, // 字体大小
               color: '#ffffff' // 字体颜色
             },
-            data: ['哈罗', '美团', '青桔', '摩拜']
+            data: []
           },
           grid: {
             top: '30px',
@@ -192,6 +192,7 @@
               smooth: true  //true 为平滑曲线，false为直线
             }
           })
+          this.options.legend.data = names
           this.chart.setOption(this.options)
         })
       }

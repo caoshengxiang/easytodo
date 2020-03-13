@@ -147,8 +147,8 @@
           // time: this.$moment(new Date()),
           // days: 7
         }).then(da => {
-          this.options.legend.data = da.data.outData
-          this.options.xAxis.data = da.data.outData2
+          this.options.legend.data = da.data.outData2
+          this.options.xAxis.data = da.data.outData
           this.options.series = da.data.value.map((item, index) => {
             return {
               name: item.name,
