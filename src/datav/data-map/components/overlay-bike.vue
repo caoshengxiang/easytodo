@@ -4,13 +4,16 @@
     pane="labelPane"
     class="sample"
     @draw="draw">
-    <div class="item" @click="showTips = !showTips">
-      <img class="icon" src="../img/2.png" alt="">
-      <div class="tips" v-if="showTips">
+    <div class="item" @click="showTips = !showTips" >
+      <img class="icon" v-if="data.type === 'h'" src="../image/bike/h.png" alt="">
+      <img class="icon" v-if="data.type === 'o'" src="../image/bike/o.png" alt="">
+      <img class="icon" v-if="data.type === 'm'" src="../image/bike/m.png" alt="">
+      <img class="icon" v-if="data.type === 'q'" src="../image/bike/q.png" alt="">
+      <div class="user-tips" v-if="showTips">
         <div class="line"></div>
         <div class="tip-con">
-          <div style="text-align: center;padding: 10px;">桂溪街道</div>
-          <video controls style="width: 100%" src="http://vfx.mtime.cn/Video/2019/02/04/mp4/190204084208765161.mp4"></video>
+<!--          <div>{{data.detail}}</div>-->
+          <div>{{data.detail}}</div>
         </div>
       </div>
     </div>
@@ -28,7 +31,7 @@
       return {
         px: 0,
         py: 0,
-        showTips: false
+        showTips: true
       }
     },
     watch: {
@@ -41,7 +44,6 @@
     },
     methods: {
       handleClick () {
-        global.alert('Well done.')
       },
       draw ({el, BMap, map}) {
         const {lng, lat} = this.position
@@ -56,45 +58,17 @@
 </script>
 
 <style scoped lang="less">
+  @import "tips";
   .sample {
     position: absolute;
   }
   .item {
     width: 37px;
     height: 53px;
-    background-image: url("../img/1.png");
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
     position: relative;
     img.icon {
       position: absolute;
-      top: 10px;
-      left: 8px;
-      width: 18px;
-    }
-    .tips {
-      /*border: 1px dashed #f5f5f5;*/
-      position: absolute;
-      left: 30px;
-      color: #ffffff;
-      .line {
-        border: 1px solid red;
-        position: absolute;
-        top: 0;
-        width: 22px;
-        height: 15px;
-      }
-      .tip-con {
-        background-image: url("../image/box.png");
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-        padding: 5px 10px;
-        width: 500px;
-        height: 360px;
-        position: absolute;
-        bottom: -30px;
-        left: 20px;
-      }
+      width: 34px;
     }
   }
 </style>

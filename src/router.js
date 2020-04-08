@@ -89,6 +89,13 @@ const router = new Router({
             title: '边界',
             pos: [{ title: '边界', name: 'map' }]
           },
+        }, {
+          path: 'swiper',
+          name: 'swiper',
+          component: () => import('./demo/swiper/swiper'),
+          meta: {
+            title: '边界',
+          },
         },
       ]
     },

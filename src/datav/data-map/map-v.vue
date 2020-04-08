@@ -10,31 +10,16 @@
                :scroll-wheel-zoom="true"
                :mapClick="false"
     >
-      <div v-if="checkedId===10">
-        <bml-heatmap :data="hot_data1" :max="10" :radius="20">
-        </bml-heatmap>
-      </div>
-      <div v-if="checkedId===11">
-        <bml-heatmap :data="hot_data2" :max="10" :radius="20">
-        </bml-heatmap>
-      </div>
-
-
-
-      <!--点位-->
-      <div v-if="isCheck(3)">
-        <!--多边形，地图边界-->
-        <bm-polygon
-          :key="'100'+index"
-          v-for="(item, index) in border1_Data"
-          :path="item.paths"
-          stroke-color="#91DF74"
-          :stroke-opacity="0.8"
-          :stroke-weight="1"
-          fillColor="#91DF74"
-          :fillOpacity="0.3"
-          :editing="false"
-        />
+      <!--摄像头-->
+      <div v-if="isCheck(1)">
+        <overlay-camera
+          v-for="(item, index) in camera_data"
+          :key="index"
+          :position="{lng: item.lng, lat: item.lat}"
+          :data="{}"
+          @mouseover.native="active = true"
+          @mouseleave.native="active = false">
+        </overlay-camera>
       </div>
       <!--围栏-->
       <div v-if="isCheck(2)">
@@ -50,18 +35,22 @@
           :editing="false"
         />
       </div>
-
-      <!---->
-      <div v-if="isCheck(1)">
-        <overlay-camera
-          v-for="(item, index) in camera_data"
-          :key="index"
-          :position="{lng: item.lng, lat: item.lat}"
-          :data="{}"
-          @mouseover.native="active = true"
-          @mouseleave.native="active = false">
-        </overlay-camera>
+      <!--点位-->
+      <div v-if="isCheck(3)">
+        <!--多边形，地图边界-->
+        <bm-polygon
+          :key="'100'+index"
+          v-for="(item, index) in border1_Data"
+          :path="item.paths"
+          stroke-color="#91DF74"
+          :stroke-opacity="0.8"
+          :stroke-weight="1"
+          fillColor="#91DF74"
+          :fillOpacity="0.3"
+          :editing="false"
+        />
       </div>
+      <!--城管人员-->
       <div v-if="isCheck(4)">
         <overlay-user1
           v-for="(item, index) in user1_data"
@@ -72,6 +61,7 @@
           @mouseleave.native="active = false">
         </overlay-user1>
       </div>
+      <!--运营人员-->
       <div v-if="isCheck(5)">
         <overlay-user2
           v-for="(item, index) in user2_data"
@@ -82,31 +72,127 @@
           @mouseleave.native="active = false">
         </overlay-user2>
       </div>
+      <!--异常车-->
+      <div v-if="isCheck(6)">
+        <overlay-bike
+          v-for="(item, index) in bike_data"
+          :key="index"
+          :position="{lng: item.lng, lat: item.lat}"
+          :data="item.data"
+        ></overlay-bike>
+      </div>
+
+      <!--热力图-->
+      <div v-if="isCheck(8)">
+        <bml-heatmap :data="hot_data1" :max="10" :radius="20">
+        </bml-heatmap>
+      </div>
+      <div v-if="isCheck(9)">
+        <bml-heatmap :data="hot_data2" :max="10" :radius="20">
+        </bml-heatmap>
+      </div>
 
     </baidu-map>
     <!--bar 栏目-->
     <div class="bar">
       <div class="title">图层筛选</div>
       <div class="con">
-        <div class="box">
-          <div class="b-t">分布图：</div>
-          <div class="b-item">
-            <div @click="checkHandle(item.id)" class="check-item" v-for="item in option" :key="item.id">
-              <img v-if="isCheck(item.id)" src="./img/check-active.png" alt="">
-              <img v-else src="./img/check.png" alt="">
-              <span>{{item.name}}</span>
-            </div>
-          </div>
+        <div class="check-item" :class="{active: isCheck(1)}" @click="checkHandle(1)">
+          <img class="icon" src="./image/bar/bar-1.png" alt="">
+          <span class="text">摄像头</span>
+          <span class="value">95</span>
         </div>
-        <div class="box">
-          <div class="b-t">热力图：</div>
-          <div class="b-item2">
-            <div @click="checkHandle2(item.id)" class="check-item" v-for="item in hotMap" :key="item.id">
-              <img v-if="checkedId === item.id" src="./img/check-active.png" alt="">
-              <img v-else src="./img/check.png" alt="">
-              <span>{{item.name}}</span>
-            </div>
-          </div>
+
+        <div class="check-item" :class="{active: isCheck(2)}" @click="checkHandle(2)">
+          <img class="icon" src="./image/bar/bar-2.png" alt="">
+          <span class="text">电子围栏</span>
+          <span class="value">95</span>
+        </div>
+
+        <div class="check-item" :class="{active: isCheck(3)}" @click="checkHandle(3)">
+          <img class="icon" src="./image/bar/bar-3.png" alt="">
+          <span class="text">停车点</span>
+          <span class="value">95</span>
+        </div>
+
+        <div class="check-item" :class="{active: isCheck(4)}" @click="checkHandle(4)">
+          <img class="icon" src="./image/bar/bar-4.png" alt="">
+          <span class="text">城管人员</span>
+          <span class="value">95</span>
+        </div>
+
+        <div class="check-item" :class="{active: isCheck(5)}" @click="checkHandle(5)">
+          <img class="icon" src="./image/bar/bar-5.png" alt="">
+          <span class="text">运营人员</span>
+          <span class="value">95</span>
+        </div>
+
+        <div class="check-item" :class="{active: isCheck(6)}" @click="checkHandle(6)">
+          <img class="icon" src="./image/bar/bar-6.png" alt="">
+          <span class="text">异常车</span>
+          <span class="value">95</span>
+        </div>
+
+        <div class="check-item" :class="{active: isCheck(7)}" @click="checkHandle(7)">
+          <img class="icon" src="./image/bar/bar-7.png" alt="">
+          <span class="text">违章投放</span>
+          <span class="value">9500</span>
+        </div>
+
+        <div class="check-item" :class="{active: isCheck(8)}" @click="checkHandle(8)">
+          <img class="icon" src="./image/bar/bar-8.png" alt="">
+          <span class="text">违章热力图</span>
+          <span class="value"></span>
+        </div>
+
+        <div class="check-item" :class="{active: isCheck(9)}" @click="checkHandle(9)">
+          <img class="icon" src="./image/bar/bar-9.png" alt="">
+          <span class="text">停放热力图</span>
+          <span class="value"></span>
+        </div>
+
+      </div>
+    </div>
+
+    <!--底部-->
+    <div class="bottom">
+      <div class="b-item">
+        <img class="icon" src="./image/bottom/b1.png" alt="">
+        <div class="t-box">
+          <div class="t-title">辖区任务</div>
+          <div class="t1"><span class="t2">125</span>个</div>
+        </div>
+        <div class="up-box">
+          <img class="up-icon" src="./image/bottom/up.png" alt="">
+        </div>
+      </div>
+
+      <div class="b-item">
+        <img class="icon" src="./image/bottom/b1.png" alt="">
+        <div class="t-box">
+          <div class="t-title">辖区任务</div>
+          <div class="t1"><span class="t2">125</span>个</div>
+        </div>
+        <div class="up-box">
+          <img class="up-icon" src="./image/bottom/up.png" alt="">
+        </div>
+      </div>
+
+      <div class="b-item">
+        <img class="l-icon" src="./image/bottom/b1.png" alt="">
+        <div class="t-box">
+          <div class="t-title">辖区任务</div>
+          <div class="t1"><span class="t2">125</span>个</div>
+        </div>
+        <div class="up-box">
+          <img class="up-icon" src="./image/bottom/down.png.png" alt="">
+        </div>
+      </div>
+
+      <div class="b-item">
+        <img class="icon" src="./image/bottom/b1.png" alt="">
+        <div class="t-box">
+          <div class="t3">任务下发</div>
         </div>
       </div>
     </div>
@@ -123,6 +209,7 @@
   import overlayCamera from './components/overlay-camera'
   import overlayUser1 from './components/overlay-user1'
   import overlayUser2 from './components/overlay-user2'
+  import overlayBike from './components/overlay-bike'
   import { mapdata } from '../../demo/border/styleJson'
 
   export default {
@@ -134,8 +221,9 @@
       overlayCamera,
       overlayUser1,
       overlayUser2,
+      overlayBike,
     },
-    data () {
+    data() {
       return {
         mapStyle: {
           styleJson: styleJson
@@ -150,19 +238,7 @@
           },
           zoom: 19, // 范围 1-19
         },
-        option: [
-          { id: 999, name: '全部' },
-          { id: 1, name: '摄像头' },
-          { id: 2, name: '电子围栏' },
-          { id: 3, name: '停车点' },
-          { id: 4, name: '城管人员' },
-          { id: 5, name: '运营人员' },
-        ],
-        hotMap: [
-          { id: 10, name: '违章热力图' },
-          { id: 11, name: '停车热力图' },
-        ],
-        checked: [1,2,3,4,5],
+        checked: [1, 2, 3, 4, 5],
         checkedId: '',
         camera_data: [
           {
@@ -191,6 +267,14 @@
           { lng: 104.06952, lat: 30.66801 },
           { lng: 104.058556, lat: 30.67721 },
           { lng: 104.070542, lat: 30.66601 },
+        ],
+        bike_data: [
+          // { lng: 104.03952, lat: 30.63801 },
+          // { lng: 104.054556, lat: 30.65721 },
+          { lng: 104.077542, lat: 30.67601, data: {type: 'h', title: '哈罗单车', detail: '故障车'} },
+          { lng: 104.077942, lat: 30.67101, data: {type: 'm', title: '哈罗单车', detail: '僵尸车'} },
+          { lng: 104.078042, lat: 30.67201, data: {type: 'o', title: '哈罗单车', detail: '僵尸车'} },
+          { lng: 104.077942, lat: 30.67901, data: {type: 'q', title: '哈罗单车', detail: '故障车'} },
         ],
         border1_Data: [
           {
@@ -235,40 +319,40 @@
         ],
         hot_data1: [
           { 'lng': 104.072896, 'lat': 30.659407, count: 3 },
-          { 'lng': 104.072896, 'lat': 30.659407, count: 8  },
-          { 'lng': 104.072896, 'lat': 30.659407, count: 3  },
-          { 'lng': 104.068896, 'lat': 30.659407, count: 6  },
-          { 'lng': 104.068896, 'lat': 30.659407, count: 10  },
-          { 'lng': 104.072896, 'lat': 30.659407, count: 5  },
-          { 'lng': 104.072896, 'lat': 30.659407, count: 8  },
-          { 'lng': 104.072896, 'lat': 30.659307, count: 5  },
-          { 'lng': 104.069896, 'lat': 30.659457, count: 10  },
-          { 'lng': 104.071796, 'lat': 30.659207, count: 3  },
-          { 'lng': 104.070796, 'lat': 30.659287, count: 10  },
-          { 'lng': 104.071796, 'lat': 30.659007, count: 3  },
-          { 'lng': 104.071196, 'lat': 30.65957, count: 7  },
-          { 'lng': 104.073796, 'lat': 30.659457, count: 3  },
-          { 'lng': 104.070796, 'lat': 30.659307, count: 8  },
-          { 'lng': 104.071796, 'lat': 30.659507 , count: 1 },
-          { 'lng': 104.071296, 'lat': 30.659287, count: 8  },
-          { 'lng': 104.071396, 'lat': 30.659207, count: 3  },
-          { 'lng': 104.070796, 'lat': 30.659107, count: 10  },
+          { 'lng': 104.072896, 'lat': 30.659407, count: 8 },
+          { 'lng': 104.072896, 'lat': 30.659407, count: 3 },
+          { 'lng': 104.068896, 'lat': 30.659407, count: 6 },
+          { 'lng': 104.068896, 'lat': 30.659407, count: 10 },
+          { 'lng': 104.072896, 'lat': 30.659407, count: 5 },
+          { 'lng': 104.072896, 'lat': 30.659407, count: 8 },
+          { 'lng': 104.072896, 'lat': 30.659307, count: 5 },
+          { 'lng': 104.069896, 'lat': 30.659457, count: 10 },
+          { 'lng': 104.071796, 'lat': 30.659207, count: 3 },
+          { 'lng': 104.070796, 'lat': 30.659287, count: 10 },
+          { 'lng': 104.071796, 'lat': 30.659007, count: 3 },
+          { 'lng': 104.071196, 'lat': 30.65957, count: 7 },
+          { 'lng': 104.073796, 'lat': 30.659457, count: 3 },
+          { 'lng': 104.070796, 'lat': 30.659307, count: 8 },
+          { 'lng': 104.071796, 'lat': 30.659507, count: 1 },
+          { 'lng': 104.071296, 'lat': 30.659287, count: 8 },
+          { 'lng': 104.071396, 'lat': 30.659207, count: 3 },
+          { 'lng': 104.070796, 'lat': 30.659107, count: 10 },
         ],
         hot_data2: [
-          { 'lng': 104.070896, 'lat': 30.659407,count: 3},
-          { 'lng': 104.072896, 'lat': 30.659457, count: 9  },
-          { 'lng': 104.073796, 'lat': 30.659207, count: 6  },
-          { 'lng': 104.076796, 'lat': 30.659287, count: 10  },
-          { 'lng': 104.070796, 'lat': 30.659007, count: 5  },
-          { 'lng': 104.075796, 'lat': 30.65957, count: 7  },
+          { 'lng': 104.070896, 'lat': 30.659407, count: 3 },
+          { 'lng': 104.072896, 'lat': 30.659457, count: 9 },
+          { 'lng': 104.073796, 'lat': 30.659207, count: 6 },
+          { 'lng': 104.076796, 'lat': 30.659287, count: 10 },
+          { 'lng': 104.070796, 'lat': 30.659007, count: 5 },
+          { 'lng': 104.075796, 'lat': 30.65957, count: 7 },
         ]
       }
     },
     methods: {
-      handler ({ BMap, map }) {
+      handler({ BMap, map }) {
         //   map.setMapStyle(this.mapStyle)
       },
-      checkHandle (id) {
+      checkHandle(id) { /// 999 代表全部
         let index = this.checked.indexOf(id)
         if (index > -1) {
           this.checked.splice(index, 1)
@@ -284,15 +368,8 @@
           }
         }
       },
-      isCheck (id) {
+      isCheck(id) {
         return this.checked.includes(id)
-      },
-      checkHandle2 (id) {
-        if (this.checkedId === id) {
-          this.checkedId = null
-        } else {
-          this.checkedId = id
-        }
       },
     }
   }
@@ -317,78 +394,76 @@
     position: relative;
 
     .bar {
-      width: 300px;
       position: absolute;
-      right: 40px;
-      top: 40px;
+      right: 16/9.6vw;
+      top: 30/9.6vw;
       color: #FFFFFF;
-      font-size: 14px;
 
       .title {
-        width: 300px;
-        height: 45px;
-        background-image: url("./img/bar-1.png");
+        font-size: 10/9.6vw;
+        width: 134/9.6vw;
+        height: 25/9.6vw;
+        background-image: url("image/bar/bar-bg-1.png");
         background-size: 100% 100%;
-        line-height: 50px;
-        padding-left: 30px;
-        box-sizing: border-box;
+        line-height: 25/9.6vw;
+        padding-left: 23/9.6vw;
+
       }
 
       .con {
         width: 100%;
-        background-image: url("./img/bar-2.png");
-        background-size: 100%;
+        background-image: url("image/bar/bar-bg-2.png");
+        background-size: 100% 100%;
         background-repeat: no-repeat;
-        padding-top: 20px;
-        margin-top: -10px;
+        box-sizing: border-box;
+        padding: 10/9.6vw 6/9.6vw;
+        margin-top: -10/9.6vw;
+        font-size: 9/9.6vw;
 
-        .box {
+        .check-item {
+          background-image: url("image/bar/item-bg.png");
+          background-size: 100% 100%;
+          background-repeat: no-repeat;
+          padding: 8/9.6vw 13.5/9.6vw;
+          height: 40/9.6vw;
+          box-sizing: border-box;
           display: flex;
-
-          .b-t {
-            width: 100px;
-            box-sizing: border-box;
-            padding-left: 20px;
+          align-items: center;
+          justify-content: space-between;
+          &.active {
+            background-image: url("image/bar/item-bg-ac.png");
           }
-
-          .b-item {
-            flex: 1;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            margin-bottom: 20px;
-
-            .check-item {
-              width: 100px;
-              display: flex;
-              align-items: center;
-              margin-bottom: 10px;
-
-              img {
-                width: 20px;
-                margin-right: 5px;
-                margin-top: -2px;
-              }
-            }
+          .icon {
+            width: 15/9.6vw;
           }
-
-          .b-item2 {
-            flex: 1;
-            margin-bottom: 20px;
-
-            .check-item {
-              width: 100px;
-              display: flex;
-              align-items: center;
-              margin-bottom: 10px;
-
-              img {
-                width: 20px;
-                margin-right: 5px;
-                margin-top: -2px;
-              }
-            }
+          .text {
+            width: 50/9.6vw;
+            display: inline-block;
           }
+          .value {
+            font-size: 15/9.6vw;
+            color: #03F7FC;
+            width: 30/9.6vw;
+            display: inline-block;
+          }
+        }
+      }
+    }
+
+    .bottom {
+      background-image: url("./image/box.png");
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      .b-item {
+        .l-icon {}
+        .t-box {
+          .t-title{}
+          .t1 {}
+          .t2 {}
+          .t3{}
+        }
+        .up-box{
+          .up-icon{}
         }
       }
     }
