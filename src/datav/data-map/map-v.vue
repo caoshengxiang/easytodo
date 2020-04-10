@@ -185,7 +185,7 @@
           <div class="t1"><span class="t2">125</span>个</div>
         </div>
         <div class="up-box">
-          <img class="up-icon" src="./image/bottom/down.png.png" alt="">
+          <img class="up-icon" src="./image/bottom/down.png" alt="">
         </div>
       </div>
 
@@ -194,6 +194,7 @@
         <div class="t-box">
           <div class="t3">任务下发</div>
         </div>
+        <div class="up-box"></div>
       </div>
     </div>
   </div>
@@ -451,16 +452,44 @@
     }
 
     .bottom {
-      background-image: url("./image/box.png");
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
+      position: absolute;
+      bottom: 40px;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+
       .b-item {
-        .l-icon {}
+        background-image: url("./image/box.png");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        width: 150/9.6vw;
+        height: 63/9.6vw;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 15/9.6vw;
+        padding-left: 10/9.6vw;
+        padding-right: 10/9.6vw;
+        box-sizing: border-box;
+        .l-icon {
+          width: 30/9.6vw;
+        }
         .t-box {
-          .t-title{}
-          .t1 {}
-          .t2 {}
-          .t3{}
+          .t-title{
+            color: #03F7FC;
+            font-size: 10/9.6vw;
+          }
+          .t1 {
+            color: #ffffff;
+            font-size: 9/9.6vw;
+          }
+          .t2 {
+            font-size: 21/9.6vw;
+          }
+          .t3{
+            color: #03F7FC;
+            font-size: 15/9.6vw;
+          }
         }
         .up-box{
           .up-icon{}
