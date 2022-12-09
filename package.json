@@ -22,7 +22,7 @@
     "jquery": "^3.4.1",
     "js-md5": "^0.7.3",
     "moment": "^2.24.0",
-    "qs": "^6.9.1",
+    "qs": "^6.5.3",
     "register-service-worker": "^1.6.2",
     "swiper": "^5.3.6",
     "v-dialogs": "2.0.2",
